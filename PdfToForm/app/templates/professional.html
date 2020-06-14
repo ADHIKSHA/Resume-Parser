@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Display</title>
+</head>
+<body>
+<h1>
+	Welcome ! {{email|safe}}
+</h1>
+Your Data has been saved Successfully!
+
+<button style="width: 200px;height:30px;font-size: 20px;font-weight: bolder;margin-left: 500px;background-color: #337ab7;"  onclick="\academic\"> Academic </button>
+<button style="width: 200px;height:30px;font-size: 20px;font-weight: bolder;margin-left: 500px;background-color: #337ab7;"  onclick="\professional\"> Professional </button>
+<p>
+Professional Details:-
+</p>
+
+<p> Internship Details:-</p>
+{%for ins in table.IN%}
+<ul>
+	<li>{{ins.position}}</li>
+	<li>{{ins.company}}</li>
+	<li>{{ins.date}}</li>
+	<li>{{ins.desc}}</li>
+</ul>
+{%endfor%}
+
+
+<p> Project Details:-</p>
+{%for prs in table.PR%}
+<ul>
+	<li>{{prs.name}}</li>
+	<li>{{prs.date}}</li>
+	<li>{{prs.link}}</li>
+	<li>{{prs.desc}}</li>
+</ul>
+{%endfor%}
+
+
+<p> Skills:-</p>
+{%for ins in table.SK%}
+<ul>
+	<li>{{ins}}</li>
+</ul>
+{%endfor%}
+
+
+
+
+</body>
+</html>

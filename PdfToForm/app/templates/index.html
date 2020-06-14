@@ -1,0 +1,60 @@
+<html>
+  <head>
+<style type="text/css">
+
+input[type="file"]::before {
+  content: 'Select your Resume';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 50px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700; 
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  background-color: #4caf50;
+  height: 80px;
+  width: 100%;
+  background-image: url("https://goo.gl/pB9rpQ");
+}
+input[type="file"]:hover::before {
+  border-color: black;
+}
+input[type="file"]:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+</style>
+  </head>
+  <body style="background-color: #3a3e4b;font-size: 20px;"align="center">
+	<br>
+     <p style="height: 50px;color:white ;font-weight:bolder;font-size: 30px;text-align: center;" id="main"> PDF TO FORM</p>
+
+
+     
+
+  Upload Your PDF Resume here
+<div style="height: 500px;width: 700px;background-color: white;margin-left: 400px;" >
+  <br><br><br>
+  <form method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %} 
+   {{ form.as_p }}  
+  
+
+  <br><br><br>
+ <button  class="btn btn-primary btn-lg" style="width: 200px;height:60px;font-size: 30px;font-weight: bolder;" >Upload</button><br>
+ &nbsp;
+ </form>
+</div>
+
+  </body>
+</html>
+
+

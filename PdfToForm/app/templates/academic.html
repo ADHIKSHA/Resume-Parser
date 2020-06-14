@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Display</title>
+</head>
+<body>
+<h1>
+	Welcome ! {{email|safe}}
+</h1>
+Your Data has been saved Successfully!
+
+<button style="width: 200px;height:30px;font-size: 20px;font-weight: bolder;margin-left: 500px;background-color: #337ab7;"  onclick="\academic\"> Academic </button>
+<button style="width: 200px;height:30px;font-size: 20px;font-weight: bolder;margin-left: 500px;background-color: #337ab7;"  onclick="\professional\"> Professional </button>
+<p>
+Education details</p>
+{%for edu in table%}
+<ul>
+	<li>{{edu.degree}}</li>
+	<li>{{edu.date}}</li>
+	<li>{{edu.inst}}</li>
+	<li>{{edu.grade}}</li>
+</ul>
+{%endfor%}
+</body>
+</html>

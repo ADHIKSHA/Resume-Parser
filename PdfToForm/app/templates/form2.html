@@ -1,0 +1,164 @@
+<html>
+  <head>
+<style type="text/css">
+
+.firstLabel {
+    margin-right: 300px;
+}
+.sec{
+   margin-right: 50px;
+   display: inline-block;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+</style>
+
+<script>
+
+  console.log('called');
+var eduids=0;
+var id='Educationtable-' + eduids + '';
+function addElement(parentId, elementTag, elementId, html) {
+    // Adds an element to the document
+    var p = document.getElementById(parentId);
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+function removeElement(elementId) {
+    // Removes an element from the document
+    var element = document.getElementById(elementId);
+    var main=document.getElementById('educations');
+    main.parentNode.removeChild(element);
+}
+    function productAdd(){
+      eduids++;
+      var id='Educationtable-' + eduids + '';
+    var html = 
+   '<span class="sec"><input type="text" name="eDegree" value=""  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>'+ 
+    '<span class="sec"><input type="text" name="eDate" value="" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>'+
+    '<span class="sec"><input type="text" name="eInstitution" value="" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>'+
+    '<span class="four"><input type="text" name="eGrade" value="" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>'+
+    '<a href="" onclick="removeElement(id);">Remove</a>';
+    addElement('educations', 'div', 'Educationtable-' + eduids, html);
+}
+function addid(){
+  console.log(eduids);
+  return eduids;
+}
+</script>
+  </head>
+  <body style="background-color: #3a3e4b;">
+	<br>
+     <p style="height: 50px;color:white ;font-weight:bolder;font-size: 30px;text-align: center;" id="main"> PDF TO FORM</p>
+
+<h1 style="height: 50px;color:white ;font-weight:bolder;font-size: 30px;margin-left: 100px;"> Edit Information and Click Save</h1>
+<div style="margin-left: 100px;">
+  <form method="POST" action="/save/">
+    <label style="color: #12a2c9;font-size: 15px;">NAME</label> <br><input style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"type="text" name="Name" value="{{table.Name}}"> 
+    <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">EMAIL</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="Email" value="{{table.Email}}"> <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">PHONE NO.</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="Phone" value="{{table.Phone}}"> <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">ADDRESS</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="Address" value="{{table.Address}}"> <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">GITHUB LINK</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="github" value="{{table.github}}"> <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">LINKED IN</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="linkedin" value="{{table.linkedin}}"> 
+    <br><br>
+   <br>
+ 
+    <label style="color: #12a2c9;font-size: 20px;">EDUCATION</label><br>
+    <hr style="color:  #12a2c9;width: 300px;"align="left"> <br>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="margin-right: 240px;"><label style="color: white;font-size: 15px;">DEGREE</label> </span>
+    <span style="margin-right: 235px;"><label style="color: white;font-size: 15px;">FROM-TO</label> </span>
+    <span style="margin-right: 235px;"><label style="color: white;font-size: 15px;">INSTITUTION</label></span>
+    <span class="four"><label style="color: white;font-size: 15px;">GRADE</label> </span>
+    <br>
+    <div id="educations">
+      <p>
+        {%for edu in table.Education%}
+    <div id="javascript:addid();">
+    <span class="sec"><input type="text" name="eDegree" value="{{edu.Degree}}"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span> 
+    <span class="sec"><input type="text" name="eDate" value="{{edu.Date}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <span class="sec"><input type="text" name="eInstitution" value="{{edu.Institution}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <span class="four"><input type="text" name="eGrade" value="{{edu.Grade}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+  </div>
+  {%endfor%}
+</p>
+</div>
+    <br><br>
+    <!--
+<div id="blank">
+   '<span class="sec"><input type="text" name="eDegree" value=""  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>'+ 
+    '<span class="sec"><input type="text" name="eDate" value="" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>'+
+    '<span class="sec"><input type="text" name="eInstitution" value="" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>'+
+    '<span class="four"><input type="text" name="eGrade" value="" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>'+
+     <button type="button" id="removebutton"class="btn btn-primary" onclick="remove();">Remove</button>
+</div>
+
+    <div id="newervals">
+    </div>-->
+    <button type="button" id="addButton"class="btn btn-primary" onclick="productAdd();">Add</button>
+    <br><br>
+    <label style="color: #12a2c9;font-size: 20px;">INTERNSHIPS</label><br>
+    <hr style="color:  #12a2c9;width: 300px;"align="left"> <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="margin-right: 250px;"><label style="color: white;font-size: 15px;">POSITION</label> </span>
+    <span style="margin-right: 230px;"><label style="color: white;font-size: 15px;">COMPANY</label> </span>
+    <span style="margin-right: 220px;"><label style="color: white;font-size: 15px;">FROM-TO</label> </span>
+    <span ><label style="color: white;font-size: 15px;">DESCRIPTION</label> </span>
+<br>
+    {%for inter in table.Internships%}
+    <span class="sec"><input type="text" name="iPosition" value="{{inter.Position}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <span class="sec"><input type="text" name="iCompany" value="{{inter.Company}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <span class="sec"><input type="text" name="iDate" value="{{inter.Date}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <span class="sec"><input type="text" name="iDescription" value="{{inter.Description}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span> 
+    <br><br>
+    {%endfor%}
+ <br><br>
+    <label style="color: #12a2c9;font-size: 20px;">PROJECTS</label><br>
+<hr style="color:  #12a2c9;width: 300px;"align="left"> <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
+    <span style="margin-right: 260px;"><label style="color: white;font-size: 15px;">NAME</label> </span>
+    <span style="margin-right: 265px;"><label style="color: white;font-size: 15px;">DATE</label></span>
+    <span style="margin-right: 250px;"><label style="color: white;font-size: 15px;">LINK</label></span>
+    <span style="margin-right: 250px;"><label style="color: white;font-size: 15px;">DESCRIPTION</label> </span>
+<br>
+    {%for pro in table.Projects%}
+    <span class="sec"><input type="text" name="pName" value="{{pro.Name}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <span class="sec"><input type="text" name="pDate" value="{{pro.Date}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <span class="sec"><input type="text" name="pLink" value="{{pro.Link}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <span class="sec"><input type="text" name="pDescription" value="{{pro.Description}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+    <br><br>
+    {%endfor%}
+
+    <br><br>
+  <label style="color: #12a2c9;font-size: 20px;">SKILLS</label><br>
+<hr style="color:  #12a2c9;width: 300px;"align="left"> <br>
+  {%for skil in table.Skills%}
+  <span class="sec"><input type="text" name="skills" value="{{skil}}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>
+{%endfor%}
+    <br><br><br>
+ <button  class="btn btn-primary btn-lg" style="width: 200px;height:50px;font-size: 30px;font-weight: bolder;margin-left: 500px;background-color: #337ab7;" >Save</button><br>
+ &nbsp;
+ </form>
+</div>
+  </body>
+</html>
+
+

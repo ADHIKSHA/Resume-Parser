@@ -1,0 +1,273 @@
+<html>
+  <head>
+<style type="text/css">
+
+.firstLabel {
+    margin-right: 300px;
+}
+.sec{
+   margin-right: 50px;
+   display: inline-block;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+</style>
+
+<script>
+
+console.log('called');
+var eduids=0;
+var projs=0;
+var skill=0;
+var interns=0;
+function addElement(parentId, elementTag, elementId, html) {
+    // Adds an element to the document
+    var p = document.getElementById(parentId);
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+    console.log(elementId);
+}
+function removeElement(elementId) {
+    // Removes an element from the document
+    console.log(elementId);
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+    function eduAdd(){
+      eduids++;
+    var id='Educationtable-' + eduids;
+    var edegree='eDegree'+eduids+'';
+    var eDate='eDate'+eduids+'';
+    var eInst='eInstitution'+eduids+'';
+    var eGrade='eGrade'+eduids+'';
+    var html = 
+   `<span class="sec"><input type="text" name="${edegree}" id="${edegree}" value= ""  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>`+ 
+    `<span class="sec"><input type="text" name="${eDate}" id="${eDate}" value= "" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="sec"><input type="text" name="${eInst}" id="${eInst}" value= "" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="four"><input type="text" name="${eGrade}" id="${eGrade}" value= "}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<button href="" style="background-color: maroon;color: white;" onclick="removeElement('Educationtable-'+${eduids});">Remove</button>`;
+    addElement('educations', 'div', 'Educationtable-' + eduids, html);
+    document.getElementById("edutotal").value=eduids;
+}
+function interAdd(){
+      interns++;
+    var id='Interntable-' + interns;
+    var ipos='iPosition'+interns+'';
+    var icomp='iCompany'+interns+'';
+    var idate='iDate'+interns+'';
+    var idesc='iDescription'+interns+'';
+    var html = 
+   `<span class="sec"><input type="text" name="${ipos}" id="${ipos}" value= ""  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>`+ 
+    `<span class="sec"><input type="text" name="${icomp}" id="${icomp}" value= "" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="sec"><input type="text" name="${idate}" id="${idate}" value= "" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="four"><input type="text" name="${idesc}" id="${idesc}" value= "" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<button href="" style="background-color: maroon;color: white;" onclick="removeElement('Interntable-'+${interns});">Remove</button>`;
+    addElement('internships', 'div', 'Interntable-' + interns, html);
+    document.getElementById("intertotal").value=interns;
+}
+
+function proAdd(){
+      projs++;
+    var id='Projecttable-' + projs;
+    var pname='pName'+projs+'';
+    var pdate='pDate'+projs+'';
+    var plink='pLink'+projs+'';
+    var pdesc='pDescription'+projs+'';
+    var html = 
+   `<span class="sec"><input type="text" name="${pname}" id="${pname}" value= ""  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>`+ 
+    `<span class="sec"><input type="text" name="${pdate}" id="${pdate}" value= "" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="sec"><input type="text" name="${plink}" id="${plink}" value= "" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="four"><input type="text" name="${pdesc}" id="${pdesc}" value= "" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<button href="" style="background-color: maroon;color: white;" onclick="removeElement('Projecttable-'+${projs});">Remove</button>`;
+    addElement('projects', 'div', 'Projecttable-' + projs, html);
+    document.getElementById("prototal").value=projs;
+}
+
+function skillAdd(){
+    skill++;
+    var id='skilltable-' + skill;
+    var skillname='skill'+skill+'';
+    var html = 
+    `<span class="sec"><input type="text" name="" value="${skillname}" id="${skillname}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<button class="sec" style="background-color: maroon;color: white;" href="" onclick="removeElement('skilltable-'+${skill});">X</button>`;
+    addElement('skills', 'span', 'skilltable-' + skill, html);
+document.getElementById("skilltotal").value=skill;
+  }
+
+
+
+function add(){
+  var len="{{table|safe}}";
+  len=len.replace(/'/g, '"'); 
+  console.log(len);
+  var final=JSON.parse(len);
+  console.log(final);
+
+  for (var i = 0; i <final.Education.length; i++) {
+    eduids++;
+    var id='Educationtable-' + eduids;
+    var edegree='eDegree'+eduids+'';
+    var eDate='eDate'+eduids+'';
+    var eInst='eInstitution'+eduids+'';
+    var eGrade='eGrade'+eduids+'';
+    var html = 
+   `<span class="sec"><input type="text" name="${edegree}" id="${edegree}" value= "${final.Education[i].Degree}"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>`+ 
+    `<span class="sec"><input type="text" name="${eDate}" id="${eDate}" value= "${final.Education[i].Date}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="sec"><input type="text" name="${eInst}" id="${eInst}" value= "${final.Education[i].Institution}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="four"><input type="text" name="${eGrade}" id="${eGrade}" value= "${final.Education[i].Grade}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<button href="" style="background-color: maroon;color: white;" onclick="removeElement('Educationtable-'+${eduids});">Remove</button>`;
+    addElement('educations', 'div', 'Educationtable-' + eduids, html);
+  }
+
+for (var i = 0; i <final.Internships.length; i++) {
+    interns++;
+    var id='Interntable-' + interns;
+    var ipos='iPosition'+interns+'';
+    var icomp='iCompany'+interns+'';
+    var idate='iDate'+interns+'';
+    var idesc='iDescription'+interns+'';
+    var html = 
+   `<span class="sec"><input type="text" name="${ipos}" id="${ipos}" value= "${final.Internships[i].Position}"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>`+ 
+    `<span class="sec"><input type="text" name="${icomp}" id="${icomp}" value= "${final.Internships[i].Company}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="sec"><input type="text" name="${idate}" id="${idate}" value= "${final.Internships[i].Date}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="four"><input type="text" name="${idesc}" id="${idesc}" value= "${final.Internships[i].Description}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<button href="" style="background-color: maroon;color: white;" onclick="removeElement('Interntable-'+${interns});">Remove</button>`;
+    addElement('internships', 'div', 'Interntable-' + interns, html);
+  }
+
+  for (var i = 0; i <final.Projects.length; i++) {
+    projs++;
+    var id='Projecttable-' + projs;
+    var pname='pName'+projs+'';
+    var pdate='pDate'+projs+'';
+    var plink='pLink'+projs+'';
+    var pdesc='pDescription'+projs+'';
+    var html = 
+   `<span class="sec"><input type="text" name="${pname}" id="${pname}" value= "${final.Projects[i].Name}"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>`+ 
+    `<span class="sec"><input type="text" name="${pdate}" id="${pdate}" value= "${final.Projects[i].Date}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="sec"><input type="text" name="${plink}" id="${plink}" value= "${final.Projects[i].Link}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<span class="four"><input type="text" name="${pdesc}" id="${pdesc}" value= "${final.Projects[i].Description}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<button style="background-color: maroon;color: white;" href="" onclick="removeElement('Projecttable-'+${projs});">Remove</button>`;
+    addElement('projects', 'div', 'Projecttable-' + projs, html);
+  }
+
+  for (var i = 0; i <final.Skills.length; i++) {
+    skill++;
+    var id='skilltable-' + skill;
+    var skillname='skill'+skill+'';
+    var html = 
+    `<span class="sec"><input type="text" name="${skillname}" value="${final.Skills[i]}" id="${skillname}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
+    `<button class="sec" style="background-color: maroon;color: white;" href="" onclick="removeElement('skilltable-'+${skill});">X</button>`;
+    addElement('skills', 'span', 'skilltable-' + skill, html);
+  }
+document.getElementById("edutotal").value=eduids;
+document.getElementById("intertotal").value=interns;
+document.getElementById("prototal").value=projs;
+document.getElementById("skilltotal").value=skill;
+
+}
+
+window.onload=add;
+document.getElementById("edutotal").value=eduids;
+document.getElementById("intertotal").value=interns;
+document.getElementById("prototal").value=projs;
+document.getElementById("skilltotal").value=skill;
+</script>
+  </head>
+  <body style="background-color: #3a3e4b;">
+	<br>
+     <p style="height: 50px;color:white ;font-weight:bolder;font-size: 30px;text-align: center;" id="main"> PDF TO FORM</p>
+
+<h1 style="height: 50px;color:white ;font-weight:bolder;font-size: 30px;margin-left: 100px;"> Edit Information and Click Save</h1>
+<div style="margin-left: 100px;">
+  <form method="POST" action="/save/">
+    <label style="color: #12a2c9;font-size: 15px;">NAME</label> <br><input style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"type="text" name="Name" value="{{table.Name}}"> 
+    <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">EMAIL</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="Email" value="{{table.Email}}"> <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">PHONE NO.</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="Phone" value="{{table.Phone}}"> <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">ADDRESS</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="Address" value="{{table.Address}}"> <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">GITHUB LINK</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="github" value="{{table.github}}"> <br><br>
+    <label style="color: #12a2c9;font-size: 15px;">LINKED IN</label> <br><input type="text"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"name="linkedin" value="{{table.linkedin}}"> 
+    <br><br>
+   <br>
+ 
+    <label style="color: #12a2c9;font-size: 20px;">EDUCATION</label><br>
+    <hr style="color:  #12a2c9;width: 300px;"align="left"> <br>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="margin-right: 240px;"><label style="color: white;font-size: 15px;">DEGREE</label> </span>
+    <span style="margin-right: 235px;"><label style="color: white;font-size: 15px;">FROM-TO</label> </span>
+    <span style="margin-right: 235px;"><label style="color: white;font-size: 15px;">INSTITUTION</label></span>
+    <span class="four"><label style="color: white;font-size: 15px;">GRADE</label> </span>
+    <br>
+    <input type="text" id="edutotal" name ="edutotal" hidden>
+    <div id="educations">
+</div>
+    <br>
+
+    <button style="background-color: green;width: 50px;color: white;" type="button" id="addButton"class="btn btn-primary" onclick="eduAdd();">Add</button>
+    <br><br>
+    <label style="color: #12a2c9;font-size: 20px;">INTERNSHIPS</label><br>
+    <hr style="color:  #12a2c9;width: 300px;"align="left"> <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="margin-right: 250px;"><label style="color: white;font-size: 15px;">POSITION</label> </span>
+    <span style="margin-right: 230px;"><label style="color: white;font-size: 15px;">COMPANY</label> </span>
+    <span style="margin-right: 220px;"><label style="color: white;font-size: 15px;">FROM-TO</label> </span>
+    <span ><label style="color: white;font-size: 15px;">DESCRIPTION</label> </span>
+<br>
+    <div id="internships">
+    </div>
+    <input type="text" id="intertotal" name="intertotal" hidden>
+ <br>
+
+  <button style="background-color: green;width: 50px;color: white;" type="button" id="addButton"class="btn btn-primary" onclick="interAdd();">Add</button>
+   <br><br>
+
+    <label style="color: #12a2c9;font-size: 20px;">PROJECTS</label><br>
+<hr style="color:  #12a2c9;width: 300px;"align="left"> <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
+    <span style="margin-right: 260px;"><label style="color: white;font-size: 15px;">NAME</label> </span>
+    <span style="margin-right: 265px;"><label style="color: white;font-size: 15px;">DATE</label></span>
+    <span style="margin-right: 250px;"><label style="color: white;font-size: 15px;">LINK</label></span>
+    <span style="margin-right: 250px;"><label style="color: white;font-size: 15px;">DESCRIPTION</label> </span>
+<br>
+   <div id="projects">
+    </div>
+<input type="text" id="prototal" name="prototal" hidden>
+    <br>
+ <button style="background-color: green;width: 50px;color: white;" type="button" id="addButton"class="btn btn-primary" onclick="proAdd();">Add</button>
+ <br><br>
+
+  <label style="color: #12a2c9;font-size: 20px;">SKILLS</label><br>
+<hr style="color:  #12a2c9;width: 300px;"align="left"> <br>
+ <br>
+   <div id="skills" >
+    </div>
+<input type="text" id="skilltotal" name="skilltotal" hidden>
+    <br>
+<button style="background-color: green;width: 50px;color: white;" type="button" id="addButton"class="btn btn-primary" onclick="skillAdd();">Add</button>
+    <br><br>
+ <button  class="btn btn-primary btn-lg" style="width: 200px;height:50px;font-size: 30px;font-weight: bolder;margin-left: 500px;background-color: #337ab7;" >Save</button><br>
+ &nbsp;
+ </form>
+</div>
+  </body>
+</html>
+
+
