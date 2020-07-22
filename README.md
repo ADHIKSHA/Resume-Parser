@@ -5,8 +5,8 @@
  
  Build Info :-
  
- cd PdfToForm
- python manage.py runserver
+ -> cd PdfToForm
+ -> python manage.py runserver
  
  Functionalities:-
  
