@@ -1,9 +1,12 @@
 from django.contrib import admin
-from app.models import *
+from .models import *
 
 # Register your models here.
-admin.site.register(General)
-admin.site.register(Education)
-admin.site.register(Internship)
-admin.site.register(Project)
-admin.site.register(Skills)
+admin.site.register(add_degree)
+admin.site.register(add_field_of_study)
+admin.site.register(add_skill)
+admin.site.register(add_project)
+admin.site.register(add_certifications)
+admin.site.register(social)
+admin.site.register(professional_pro)
+admin.site.register(academic)

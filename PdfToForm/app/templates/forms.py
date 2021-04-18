@@ -1,3 +1,3 @@
 from django import forms  
 class StudentForm(forms.Form):  
-    file      = forms.FileField() # for creating file input 
+    file      = forms.FileField(attrs={'class' : 'files'}) # for creating file input 

@@ -1,8 +1,7 @@
 
-
-from nltk.corpus import stopwords 
-from nltk.tokenize import word_tokenize 
-
+#from nltk.corpus import stopwords 
+#from nltk.tokenize import word_tokenize 
+import nltk
 
 
 def basicdetails(lines,text):
@@ -16,24 +15,17 @@ def basicdetails(lines,text):
     matcher = Matcher(nlp.vocab)
     dictionary={}
     def extract_name(resume_text,lines):
-        for line in lines:
-            words= word_tokenize(line)
-            stop_words = set(stopwords.words('english')) 
-            for w in words:
-                if w in stop_words:
-                    continue
                     
-            nlp_text = nlp(line)
+        nlp_text = nlp(resume_text)
         
             # First name and Last name are always Proper Nouns
-            pattern = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
+        pattern = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
         
-            matcher.add('NAME', None, pattern)
-        
-            matches = matcher(nlp_text)
-            for match_id, start, end in matches:
-                span = nlp_text[start:end]
-                return span.text
+        matcher.add('NAME', None, pattern)
+        matches = matcher(nlp_text)
+        for match_id, start, end in matches:
+            span = nlp_text[start:end]
+            return span.text
 
     print('Name')
     name=extract_name(text,lines)
@@ -43,7 +35,7 @@ def basicdetails(lines,text):
     import re
 
     def extract_mobile_number(text):
-        phone = re.findall(re.compile(r'(?:(?:\+?([1-9]|[0-9][0-9]|[0-9][0-9][0-9])\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([0-9][1-9]|[0-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?'), text)
+        phone = re.findall(re.compile(r'[0-9]{0,2}\s*[0-9]{10}'), text)
         
         if phone:
             number = ''.join(phone[0])
@@ -75,11 +67,11 @@ def basicdetails(lines,text):
 
 
 
-    word_tokens = word_tokenize(text) 
+    word_tokens = nltk.word_tokenize(text) 
     #print(word_tokens)
 
     def extract_degrees(lines):
-        degrees=['b.tech','ba','ma','xii','b.sc','m.sc','m.tech','high','senior','x','bachelor','bachelors','master','masters','speicalization','mba','msc','10+2']
+        degrees=['b.tech','ba','ma','xii','b.sc','m.sc','m.tech','high','senior','x','bachelor','bachelors','master','masters','specialization','mba','msc','10+2']
         in_degrees=[]
         for w in lines:
             w=w.lower()
@@ -97,9 +89,35 @@ def basicdetails(lines,text):
             #finddates=extract_dates(text,count_edu)
             print(degrees)
 
+    def extract_gender(word_tokens):
+        gender=" "
+        for w in word_tokens:
+            if w.lower()=="male":
+                gender=w
+            elif w.lower()=="female":
+                gender=w
+        return gender
 
+    gender=extract_gender(word_tokens)
+    dictionary['gender']=gender
     dictionary['degrees']=degrees
     return dictionary
 
 
+fields_of_study=['computer','science','buisness','art','commerce','economics']
 
+def find_fields(check_line):
+    words=nltk.word_tokenize(check_line)
+    for w in words:
+        if w in fields_of_study:
+            return w
+    return None
+
+emptypes=['internship','part-time','full-time','self_employed','freelance','contract']
+
+def find_emp_type(check_line):
+    words=nltk.word_tokenize(check_line)
+    for w in words:
+        if w in emptypes:
+            return w
+    return None
